@@ -3,7 +3,8 @@ const { createApp } = Vue;
 createApp({
     data() {
         return{
-            todoList: [
+            currentItem: 0,
+            toDoList: [
                 {
                     text: "fare l'esercizio con vue",
                     done: false
@@ -18,4 +19,4 @@ createApp({
     methods: {
 
     }
-}).mount("#app")
+}).mount("#app");
