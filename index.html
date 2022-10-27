@@ -16,8 +16,9 @@
             </div>
 
             <ul>
-                <li>{{toDoList[0].text}}</li>
-                <li>{{toDoList[1].text}}</li>
+                <li v-for="(item, index) in toDoList">
+                    {{ item.text }}
+                </li>
             </ul>
         </div>
     </div>
