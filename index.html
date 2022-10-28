@@ -1,28 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
-</head>
-<body>
-    <div id="app">
+<!-- <div id="app">
         <div class="container">
             <div class="title">
                 <h1>To Do List</h1>
             </div>
 
             <ul>
-                <li v-for="(item, index) in toDoList">
+                <li 
+                v-for="(item, index) in toDoList"
+                :class="item.done ? `line-through` : ``"
+                >
                     {{ item.text }}
                 </li>
             </ul>
         </div>
+    </div> -->
+
+<!-- CORREZIONE -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <title>Document</title>
+    </head>
+    <body>
+    <div id="app" class="container">
+        <header>
+        <h1>TO DO LIST</h1>
+        <div class="new-task">
+            <label for="task-text">Nuovo task</label>
+            <input
+            type="text"
+            id="task-text"
+            placeholder="Inserisci nuovo task"
+            v-model.trim="newTodo"
+            @keyup.enter="addNewTodo"
+            />
+            <button @click="addNewTodo">Inserisci</button>
+            <div class="error" v-if="hasError">
+            <small>Il task deve essere lungo almeno di 5 caratteri</small>
+            </div>
+        </div>
+        </header>
+
+        <div class="tasks-container">
+        <p v-if="todos.length === 0">Per oggi hai finito! :D</p>
+        <ul v-else>
+            <li v-for="(thisTodo, index) in todos">
+            <span
+                :class="{ 'task-done': thisTodo.done }"
+                @click="changeDone(index)"
+            >
+                {{ thisTodo.text }}
+            </span>
+            <span class="task-delete" @click="removeTodo(index)">&cross;</span>
+            </li>
+        </ul>
+        </div>
     </div>
 
     <script src="js/script.js"></script>
-</body>
+    </body>
 </html>
